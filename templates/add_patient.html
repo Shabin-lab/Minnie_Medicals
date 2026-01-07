@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🏥 Add Patient</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+</head>
+<body>
+  <div class="container">
+    <h2>🏥 Add Patient</h2>
+
+    <form action="/add_patient" method="POST">
+      <label for="name">Patient Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required>
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">--Select Gender--</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="contact">Contact:</label>
+      <input type="text" id="contact" name="contact">
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address"></textarea>
+
+      <button type="submit">💾 Save Patient</button>
+    </form>
+
+    <a href="/">🏠 Back to Home</a>
+  </div>
+</body>
+</html>

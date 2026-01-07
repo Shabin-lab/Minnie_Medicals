@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🏥 Pharmacy Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .alert {
+            background-color: #ffe6e6;
+            color: #b30000;
+            border: 1px solid #ff9999;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 MINNIE MEDICALS</h1>
+
+        {% if low_stock %}
+        <div class="alert">
+            ⚠️ <strong>Low Stock Alert!</strong><br>
+            {% for med in low_stock %}
+                {{ med.name }} → Only {{ med.qty }} strips left!<br>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="menu">
+            <a href="/add_medicine">➕ Add Medicine</a>
+            <a href="/view_medicine">👁️ View Medicines</a>
+            <a href="/add_patient">➕ Add Patient</a>
+            <a href="/view_patient">👁️ View Patients</a>
+            <a href="/sell_medicine">💊 Sell Medicine</a>
+            <a href="/view_sales">📊 View Sales</a>
+            <a href="/check_stock">📦 Check Stock</a>
+        </div>
+    </div>
+</body>
+</html>
+

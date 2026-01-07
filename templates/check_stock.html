@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Check Stock — MINNIE MEDICALS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body{ font-family: 'Segoe UI', Arial, sans-serif; background:#f4f8fc; margin:0; padding:30px; }
+    .card{ max-width:1000px; margin:20px auto; background:#fff; border-radius:12px; padding:24px; box-shadow:0 8px 30px rgba(27,64,122,0.06); }
+    h1{ color:#1266d4; margin:0 0 12px; }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+    .controls input[type="text"], .controls select {
+      padding:9px 10px; border-radius:8px; border:1px solid #d6dfe9; font-size:14px; width:320px;
+    }
+    .controls button {
+      background:#1a73e8; color:#fff; border:none; padding:9px 14px; border-radius:8px; cursor:pointer; font-weight:600;
+    }
+    .controls button:hover{ background:#125fcc; }
+    table{ width:100%; border-collapse:collapse; margin-top:8px; }
+    th, td{ padding:12px 10px; border-bottom:1px solid #eef3fb; text-align:left; }
+    th{ background: linear-gradient(90deg,#1a73e8,#0f5ec7); color:#fff; }
+    .note{ color:#666; margin-bottom:10px; }
+    .back{ display:block; text-align:center; margin-top:18px; color:#1a73e8; font-weight:700; text-decoration:none; }
+    @media (max-width:720px){
+      .controls input[type="text"]{ width:100%; }
+      .controls select{ width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>📦 Low Stock Medicines</h1>
+
+    <div class="controls">
+      <form method="GET" action="/check_stock" style="display:flex;gap:10px;align-items:center;">
+              </form>
+
+      <form method="GET" action="/check_stock" style="display:flex;gap:10px;align-items:center;">
+        <select name="q" onchange="this.form.submit()">
+          <option value="">-- Select medicine to check stock --</option>
+          {% for m in all_meds %}
+            <option value="{{ m.name }}" {% if query==m.name %}selected{% endif %}>{{ m.name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+
+    <div class="note">{{ message }}</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:60px;">ID</th>
+          <th>Medicine Name</th>
+          <th style="width:160px;">Batch No</th>
+          <th style="width:120px;text-align:center;">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if results %}
+          {% for med in results %}
+          <tr>
+            <td>{{ med.id }}</td>
+            <td>{{ med.name }}</td>
+            <td>{{ med.batch_no or '-' }}</td>
+            <td style="text-align:center;">{{ med.quantity }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="4" style="text-align:center; padding:18px; color:#666;">No records to show.</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+    <a href="/" class="back">🏠 Back to Home</a>
+  </div>
+</body>
+</html>

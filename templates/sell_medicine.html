@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sell Medicine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>💊 Sell Medicine</h2>
+
+    <form method="POST">
+      <label>Patient Name:</label>
+      <input type="text" name="patient_name" required>
+
+      <label>Select Medicine:</label>
+      <select name="medicine_name" required>
+        {% for med in medicines %}
+        <option value="{{ med.name }}">{{ med.name }} (₹{{ med.sell_price }} | Stock: {{ med.quantity }})</option>
+        {% endfor %}
+      </select>
+
+      <label>Quantity:</label>
+      <input type="number" name="quantity" required>
+
+      <label>Price per unit:</label>
+      <input type="number" step="0.01" name="price_per_unit" required>
+
+      <button type="submit">💰 Confirm Sale</button>
+    </form>
+
+    <a href="/">🏠 Back to Home</a>
+  </div>
+</body>
+</html>

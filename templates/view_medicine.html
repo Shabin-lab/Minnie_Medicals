@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📋 View Medicines </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>📋 View Medicines</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Purchased From</th>
+          <th>Batch No</th>
+          <th>Quantity</th>
+          <th>HSN Code</th>
+          <th>Expiry</th>
+          <th>Cost Price</th>
+          <th>GST</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine in medicines %}
+        <tr>
+          <td>{{ medicine.id }}</td>
+          <td>{{ medicine.name }}</td>
+          <td>{{ medicine.type }}</td>
+          <td>{{ medicine.company }}</td>
+          <td>{{ medicine.batch_no }}</td>
+          <td>{{ medicine.quantity }}</td>
+          <td>{{ medicine.hsn_code }}</td>
+          <td>{{ medicine.expiry_date }}</td>
+          <td>{{ medicine.cost_price }}</td>
+          <td>{{ medicine.gst }}</td>
+          <td>
+            <a href="/update_medicine/{{ medicine.id }}" class="btn edit-btn" >✏️ Edit</a>
+            <a href="/delete_medicine/{{ medicine.id }}" class="btn delete-btn">🗑️ Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <br>
+    <a href="/" class="back-btn">🏠 Back to Home</a>
+    
+  </div>
+</body>
+</html>
